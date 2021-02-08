@@ -1,0 +1,65 @@
+<ngb-alert class="mt-1" *ngIf="newProductCreated && !staticAlertClosed" (close)="closeAlert()" type="success">Le produit est ajouté avec succès</ngb-alert>
+<ngb-alert class="mt-1" *ngIf="productUpdated && !staticAlertClosed" (close)="closeAlertForUpdate()" type="warning">Le produit est modifié avec succès</ngb-alert>
+<ngb-alert class="mt-1" *ngIf="productDeleted && !deletedStaticAlertClosed" (close)="closeAlertForDelete()" type="danger">Le produit est supprimé avec succès</ngb-alert>
+
+<div class="container">
+
+  <div class="text-right">
+    <button type="button" class="btn btn-outline-primary mb-4" (click)="onAddProduct()">Ajouter un produit</button>
+</div>
+
+<form class="my-2 my-lg-0" #f="ngForm" (ngSubmit)="onSearch(f.value)">
+  <div class="form-group">
+    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 mt-5">
+      <div class="input-group">
+        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" name="name" class="form-control border-0 bg-light" ngModel>
+        <div class="input-group-append">
+          <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+  <div class="row justify-content-center">
+    <div class="btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary mr-3 mb-3"  style="width: 6rem; max-width: 6rem; font-size: 12px;" (click)="setCurrentCategory()" [ngClass]="currentCategory.name=='Tous'? 'active' : ''">
+        <input type="radio" name="options" id="option1" autocomplete="off" [ngClass]="currentCategory.name=='Tous'? 'checked' : ''"> Tous
+      </label>
+      <label class="btn btn-secondary mr-3 mb-3"  style="width: 6rem; max-width: 6rem; font-size: 12px;" *ngFor="let c of categories" (click)="getCurrentCategory(c)" [ngClass]="currentCategory==c? 'active' : ''">
+        <input type="radio" name="options" id="option2" autocomplete="off" [ngClass]="currentCategory==c? 'checked' : ''"> {{c.name}}
+      </label>
+    </div>
+  </div>
+
+    <div class="card-deck mb-3 text-center" *ngIf = "products">
+        <div class="card mb-4 shadow-sm" style="margin-right: 5px;" *ngFor = "let p of products">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">{{p.name}}</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">{{p.price | number:'1.1-2'}} <small class="text-muted"> dhs</small></h1>
+              <ul class="list-unstyled" *ngFor="let char of p.characteristics">
+                <li>{{char}}</li>
+              </ul>
+            </div>
+            <div class="card-footer row">
+              <button type="button" class="btn btn-lg btn-block btn-primary" (click)="onUpdateProduct(p)">Modifier</button>
+              <button type="button" class="btn btn-lg btn-block btn-danger" (click)="onDeleteProduct(p)">Supprimer</button>
+            </div>
+          </div>
+    </div>
+
+    <nav aria-label="..." *ngIf = "pages">
+      <ul class="pagination justify-content-center">
+        <li class="page-item clickable" [ngClass]="currentPage==1? 'disabled' : ''">
+          <a class="page-link" (click)="previousPage()">Previous</a>
+        </li>
+        <li #list class="page-item clickable" [ngClass]="i==currentPage - 1? 'active' : ''" *ngFor="let p of pages; let i = index"><a class="page-link" (click)="onPageProduct(i)">{{i}}</a></li>
+        <li class="page-item clickable" [ngClass]="currentPage==totalPages? 'disabled' : ''">
+          <a class="page-link" (click)="nextPage()">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+</div>

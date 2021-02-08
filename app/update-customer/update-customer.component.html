@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6 col-xs-12">
+        <div class="card mt-3">
+            <div class="card-header">Nouveau Produit</div>
+            <div class="card-body">
+                <form  #f="ngForm" (ngSubmit)="onUpdateCustomer(f.value)" [formGroup]="updateCustomerForm">
+                    <div class="form-group">
+                        <label for="nameProduct" class="control-label">Nom et prénom</label>
+                        <input id="nameProduct" type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && form.name.errors }" [(ngModel)]="custDataForSibling.name">
+                        <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                            <div *ngIf="form.name.errors.required">Le nom du produit est requis</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input id="email" type="text" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }" [(ngModel)]="custDataForSibling.email">
+                        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                            <div *ngIf="form.email.errors.required">Le prix du produit est requis</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="control-label">Téléphone</label>
+                        <input id="phone" type="text" class="form-control" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && form.phone.errors }" [(ngModel)]="custDataForSibling.phone">
+                        <div *ngIf="submitted && form.phone.errors" class="invalid-feedback">
+                            <div *ngIf="form.phone.errors.required">Le prix du produit est requis</div>
+                        </div>
+                    </div>
+                   
+                    <div class="text-right mt-4">
+                        <button class="btn btn-success" type="submit">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

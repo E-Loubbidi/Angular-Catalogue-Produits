@@ -1,0 +1,41 @@
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6 col-xs-12">
+        <div class="card mt-3">
+            <div class="card-header">Nouveau consommateur</div>
+            <div class="card-body">
+                <form  #f="ngForm" (ngSubmit)="onAddNewCustomer(f.value)" [formGroup]="newCustomerForm">
+                    
+                    <div class="form-group">
+                        <label for="name" class="control-label">Nom et prénom</label>
+                        <input id="name" type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && form.name.errors }" ngModel> 
+                        <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                            <div *ngIf="form.name.errors.required">Le nom et le prénom sont requis</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="control-label">Email</label>
+                        <input id="phone" type="text" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.name.errors }" ngModel> 
+                        <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                            <div *ngIf="form.name.errors.required">L'email est requis</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label">Téléphone</label>
+                        <input id="email" type="text" class="form-control" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && form.name.errors }" ngModel> 
+                        <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                            <div *ngIf="form.name.errors.required">Le téléphone est requis</div>
+                        </div>
+                    </div>
+                   
+                    <div class="text-right mt-4">
+                        <button class="btn btn-success" type="submit">Ajouter</button>
+                        <button class="btn btn-secondary ml-3" type="reset" (click)="onReset()">Réinitialiser</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
